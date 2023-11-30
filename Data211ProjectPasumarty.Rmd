@@ -1,0 +1,63 @@
+---
+title: "Data211Project"
+author: "Rayank Pasumarty"
+date: "2023-11-25"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+##Libraries
+```{r}
+library(ggplot2)
+```
+
+
+##Dataframe
+```{r}
+#Collected data
+day <- c(1, 2, 3, 4, 5, 8, 9, 10, 11, 13, 14, 15, 16, 17)
+screen_time <- c(72, 43, 112, 26, 91, 42, 68, 80, 25, 116, 74, 37, 55, 103)
+sleep_quality <- c(8, 7, 4, 6, 5, 8, 8, 7, 6, 2, 4, 6, 3, 3)
+
+#Create the dataframe with my data
+df <- data.frame(Day = day, Screen_Time = screen_time, Sleep_Quality = sleep_quality)
+
+
+df
+```
+##Correlation Analysis and Hypothesis Testing 
+Hypothesis Test:
+
+$H_0: \rho = 0$
+
+$H_a: \rho \ne 0$
+
+```{r}
+test1 <- cor.test(df$Screen_Time, df$Sleep_Quality, method = 'pearson', alternative = 'two.sided')
+
+test1
+```
+##GGPlot Visualization
+
+```{r}
+#Scatter plot of my data with regression line
+ggplot(data = df, aes(x = Screen_Time, y = Sleep_Quality)) +
+  geom_point() +
+  geom_smooth(method = 'lm', se = FALSE, color = 'goldenrod') +
+  labs(x = 'Screen Time (minutes after 10 PM)',
+       y = 'Sleep Quality (1-10 scale)',
+       title = 'Scatter Plot of Screen Time and Sleep Quality')
+
+```
+
+
+
+
+
+
+
+
